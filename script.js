@@ -1330,3 +1330,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // popupClose.addEventListener('click', closePopup);
 
 // verified popup 
+
+
+// navigate menu
+
+
+function scrollToSection(event, sectionId) {
+  event.preventDefault(); 
+  document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+
+
+
+document.getElementById('event-navigate').addEventListener('click', function(event) {
+  scrollToSection(event, 'events-section');
+});
+
+document.getElementById('chat-navigate').addEventListener('click', function(event) {
+  scrollToSection(event, 'chatSection');
+});
+
+document.getElementById('calender-navigate').addEventListener('click', function(event) {
+  scrollToSection(event, 'calender-section');
+});
+
+
+// navigate menu ENDS

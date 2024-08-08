@@ -88,10 +88,10 @@
         </div>
 
         <div class=" lg:flex hidden items-center font-poppins  font-medium gap-4">
-            <span> Home </span>
-            <span>Event</span>
-            <span>Task</span>
-            <span>Calender</span>
+       
+          <a class="authenticated-content" id="event-navigate" href="#">  <span>Event</span> </a> 
+            <a class="authenticated-content" id="chat-navigate" href="#">  <span>Chat</span> </a> 
+              <a class="authenticated-content" id="calender-navigate" href="#">  <span>Calender</span>
             <a href="impressum.html"><span>Impressum</span></a>
             <div id="loginSignupButtons" class=" flex gap-2  item "> 
 
@@ -119,7 +119,7 @@
         
        <!-- cover image bg  -->
 
-       <div class=" relative h-[500px] w-full  ">
+       <div id="home-section" class=" relative h-[500px] w-full  ">
 
         <img   src="./images/cover.png" class=" absolute w-full h-full   object-cover"  >
 
@@ -208,7 +208,7 @@
        <!-- show events available for search  -->
 
 
-       <div class=" flex w-full justify-center">
+       <div  class=" flex w-full justify-center">
         
         
         <div class=" w-full authenticated-content hidden max-w-7xl p-4">
@@ -278,7 +278,7 @@
 
 <!-- create event  -->
 
-       <div class="  authenticated-content mt-16 pb-10 flex flex-col items-center">
+       <div id="events-section" class="  authenticated-content mt-16 pb-10 flex flex-col items-center">
 
         <h1 class=" font-poppins text-3xl font-semibold text-center"> Create an event or edit an Event</h1>
 
@@ -342,7 +342,7 @@
 
 
        <!-- table for task  -->
-        <div class=" flex justify-center w-full" > 
+        <div  class=" flex justify-center w-full" > 
 
        
        <div class="  authenticated-content max-w-7xl w-full  p-4">
@@ -440,7 +440,7 @@
 
     </div> -->
 
-    <div class="relative">
+    <div id="calender-section" class="relative">
       <div class="max-w-7xl mx-auto p-4">
         <h1 class="text-3xl font-bold mb-2">Calendar</h1>
         <div class="flex  lg:flex-row flex-col lg:items-center lg:gap-0 gap-3 space-x-4 mb-4">
@@ -479,7 +479,7 @@
 
 
    <!-- chat screen  -->
-        <div id="chatSection" class="justify-center w-full flex authenticated-content">
+        <div  id="chatSection" class="justify-center w-full flex authenticated-content">
           <div class="max-w-7xl w-full">
             <h1 class="font-semibold font-poppins text-xl p-4">Chatting</h1>
             <div class="container">
