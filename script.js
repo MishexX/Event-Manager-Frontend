@@ -108,7 +108,7 @@ const createHtmlStructures = () => `
     formData.append('admin' , token)
   
     try {
-      const response = await fetch('http://localhost:5000/api/events', {
+      const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/events', {
         method: 'POST',
         body: formData
       });
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const fetchEventsByAdmin = async (adminEmail) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${adminEmail}`);
+      const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/events/${adminEmail}`);
       const events = await response.json();
       console.log(events);
       return events;
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     try {
-      await fetch(`http://localhost:5000/api/events/${eventId}`, {
+      await fetch(`https://event-manager-backend-cgrz.onrender.com/api/events/${eventId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ eventName: newEventName })
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   window.confirmDeleteEvent = async (eventId) => {
     try {
-      await fetch(`http://localhost:5000/api/events/${eventId}`, {
+      await fetch(`https://event-manager-backend-cgrz.onrender.com/api/events/${eventId}`, {
         method: 'DELETE',
       });
       const events = await fetchEventsByAdmin(adminEmail);
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const fetchRegistrations = async () => {
     const token = localStorage.getItem('email');
     try {
-      const response = await fetch(`http://localhost:5000/api/registrations/${token}`);
+      const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/registrations/${token}`);
       const data = await response.json();
       console.log(data);
       return data.registrations;
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
   
-  const BASE_URL = 'http://localhost:5000';
+  const BASE_URL = 'https://event-manager-backend-cgrz.onrender.com';
   
   // Function to format the date and month
   const formatDate = (dateString) => {
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Register for an event
 const registerForEvent = async (eventData) => {
   try {
-    const response = await fetch('http://localhost:5000/api/register', {
+    const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -410,7 +410,7 @@ document.getElementById('searchButton').addEventListener('click', async () => {
   const encodedQuery = encodeURIComponent(searchInput);
 
   try {
-    const response = await fetch(`http://localhost:5000/api/events/search/${encodedQuery}`);
+    const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/events/search/${encodedQuery}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -501,8 +501,8 @@ document.getElementById('cancelButton').addEventListener('click', () => {
 
 // EVENTS FOR DATES SELECTED ON CALENDER 
 document.addEventListener('DOMContentLoaded', function () {
-  const BASE_URL = 'http://localhost:5000/api'; 
-  const IMG_URL = 'http://localhost:5000'; 
+  const BASE_URL = 'https://event-manager-backend-cgrz.onrender.com/api'; 
+  const IMG_URL = 'https://event-manager-backend-cgrz.onrender.com'; 
   const dateDisplay = document.getElementById('dateDisplay');
   const eventList = document.getElementById('eventList');
   let selectedDateRange = [];
@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -765,7 +765,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1044,7 +1044,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/user/${email}`);
+      const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/auth/user/${email}`);
       const data = await response.json();
       nameDisplay.textContent = data.name || "Not Set";
       lastNameDisplay.textContent = data.last_name || "Not Set";
@@ -1052,7 +1052,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       phoneDisplay.textContent = data.phone_number || "Not Set";
 
       if (data.profile_image) {
-        profileImage.src = `http://localhost:5000${data.profile_image}`;
+        profileImage.src = `https://event-manager-backend-cgrz.onrender.com${data.profile_image}`;
       } else {
         profileImage.src = "https://via.placeholder.com/200";
       }
@@ -1123,7 +1123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/user/${email}`, {
+      const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/auth/user/${email}`, {
         method: "PUT",
         body: formData,
       });
@@ -1242,7 +1242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const email = localStorage.getItem('email');
       console.log(email);
-      const response = await fetch(`http://localhost:5000/api/auth/change-password`, {
+      const response = await fetch(`https://event-manager-backend-cgrz.onrender.com/api/auth/change-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
