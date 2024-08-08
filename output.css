@@ -1467,6 +1467,15 @@ input:checked + .slider:before {
   .md\:flex-row {
     flex-direction: row;
   }
+
+  .md\:p-4 {
+    padding: 1rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {

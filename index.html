@@ -1041,7 +1041,15 @@
           console.log('Button clicked');
           const adminEmail = event.target.getAttribute('data-email');
           console.log('Admin Email:', adminEmail);
+
+          const email  = localStorage.getItem("email")
+
+          if(adminEmail === email) {
+            return
+          }
+
           
+
           document.querySelector('#chatContainer').scrollIntoView({ behavior: 'smooth' });
           handleChatSelection(adminEmail); // Ensure the correct handling of chat selection
       }
@@ -1089,6 +1097,15 @@ const handleAdminChat = async (email) => {
 document.body.addEventListener('click', (event) => {
     if (event.target.matches('.admin-chat-button')) {
         const adminEmail = event.target.getAttribute('data-email');
+
+
+        const email = localStorage.getItem("email")
+
+        if(adminEmail  === email) {
+          return
+        }
+
+
         
         // Handle chat selection
         handleAdminChat(adminEmail);
