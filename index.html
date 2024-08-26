@@ -55,7 +55,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
 
 
@@ -204,6 +208,8 @@
           </div> 
 
         </div>
+
+      
      
        <!-- show events available for search  -->
 
@@ -631,15 +637,16 @@
               
           <div class=" max-w-7xl w-full">
             
-            <div class=" grid md:grid-cols-1 lg:grid-cols-5 gap-3">
+            <div class=" grid md:grid-cols-1 lg:grid-cols-4 gap-3">
               
               <h1> Smart Event Organizer</h1>
               
 
               <div class=" flex flex-col gap-4">
 
-                <h1> Home </h1>
-                <h1> Calender </h1>
+                <a id="event-navigates" href="#"> <span>Event</span></a>
+                
+                <a id="calender-navigates" href="#"> <span>  Calender  </span></a>
 
               </div>
 
@@ -647,18 +654,13 @@
               
               <div class=" flex flex-col gap-4">
 
-                <h1> Event </h1>
-                <h1> Setting </h1>
+                <a id="chat-navigates" href="#"> <span>  Chat  </span></a>
+                <a href="/impressum.html"> Impressum </a>
 
               </div>
 
 
-              <div class=" flex flex-col gap-4">
-
-                <h1>Task </h1>
-                <h1> Impressum </h1>
-
-              </div>
+           
 
 
               <div class=" flex flex-col gap-4">
@@ -680,7 +682,7 @@
             <!-- border  -->
 
             <div class=" mt-4"> 
-              <h1 class=" font-poppins text-sm">Copyright © 2022 B EVENT LLC. All rights reserved </h1>
+              <h1 class=" font-poppins text-sm">Copyright © 2024 B EVENT LLC. All rights reserved </h1>
             </div>
 
           </div>

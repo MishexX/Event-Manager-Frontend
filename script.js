@@ -319,7 +319,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { day, month } = formatDate(registration.date); // Assuming `date` field exists in registration
   
     return `
-      <div class="relative w-full h-[280px]  data-date="${registration.date}" ">
+     
+       <div class="relative w-full h-[280px]" data-date="${registration.date}">
         <img class="w-full h-full absolute object-cover" src="${BASE_URL}${registration.image}" alt="${registration.eventName}">
         <div class="absolute z-10 flex px-2 top-3 w-full"> 
           <div class="flex justify-between items-center w-full">
@@ -1160,55 +1161,99 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 // download the pdf 
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Ensure jsPDF is available
   const { jsPDF } = window.jspdf;
 
-  console.log('Script loaded');
-  console.log('jsPDF:', jsPDF); 
-
   // Function to generate and download PDF
-  function generatePDF(eventName, location, time, adminEmail , fullDate) {
-    const userEmail = localStorage.getItem('email'); // Assuming the email is stored under 'email'
-    
-    console.log('Generating PDF with:', { eventName, location, time, adminEmail, userEmail });
+ //pdf 
+ function generatePDF(eventName, location, time, adminEmail, fullDate) {
+  const userEmail = localStorage.getItem('email'); 
+  const formattedDate = new Date(fullDate).toLocaleDateString();
+  console.log(fullDate);
+  
+  console.log(formattedDate);
+  
 
-    const doc = new jsPDF();
 
-    const formattedDate = new Date(fullDate).toLocaleDateString();
-    
-    doc.setFontSize(16);
-    doc.text('Event Registration Details', 10, 10);
-    
-    doc.setFontSize(12);
-    doc.text(`Date: ${formattedDate}`, 10, 20);
-    doc.text(`Event Name: ${eventName}`, 10, 30);
-    doc.text(`Location: ${location}`, 10, 40);
-    doc.text(`Time: ${time}`, 10, 50);
-    doc.text(`Admin Email: ${adminEmail}`, 10, 60);
-    doc.text(`User Email: ${userEmail}`, 10, 70);
-    
-    doc.save('registration-details.pdf');
-  }
+  const element = document.createElement('div');
+  element.classList.add('flex', 'bg-blue-500', 'justify-between', 'p-6');
+
+
+  const leftSection = document.createElement('div');
+  leftSection.classList.add('w-1/2', 'bg-blue', 'flex', 'justify-center', 'items-center');
+
+ 
+  const imgContainer = document.createElement('div');
+  imgContainer.classList.add('bg-white', 'p-2', 'rounded-lg');
+
+  const img = document.createElement('img');
+  img.src = './images/imga.png'; 
+  img.alt = 'Event Manager Logo';
+  img.classList.add('w-fit', 'h-48', 'object-cover');
+
+  imgContainer.appendChild(img);
+  leftSection.appendChild(imgContainer);
+  element.appendChild(leftSection);
+
+
+
+
+ 
+  const rightSection = document.createElement('div');
+  rightSection.classList.add('w-1/2', 'bg-white', 'p-8');
+  
+  rightSection.innerHTML = `
+      <h1 class="text-4xl font-bold mb-6">Event Register</h1>
+      <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Event Name</label>
+          <p class=" border p-1 text-gray-700">${eventName}</p>
+      </div>
+      <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Location</label>
+          <p class=" border  p-1 text-gray-700">${location}</p>
+      </div>
+      <div class="mb-4 flex">
+          <div class="w-1/2 mr-2">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Time</label>
+              <p class=" border p-1 text-gray-700">${time}</p>
+          </div>
+          <div class="w-1/2 ml-2">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Date</label>
+              <p class=" border p-1 text-gray-700">${formattedDate}</p>
+          </div>
+      </div>
+      <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Admin Email</label>
+          <p class=" border p-1 text-gray-700">${adminEmail}</p>
+      </div>
+      <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">User Email</label>
+          <p class=" border p-1 text-gray-700">${userEmail}</p>
+      </div>
+  `;
+
+  element.appendChild(leftSection);
+  element.appendChild(rightSection);
+
+  // Use html2pdf to generate the PDF
+  html2pdf().from(element).save('registration-details.pdf');
+}
+ //pdf 
 
   // Attach event listener to all download buttons
   document.body.addEventListener('click', (event) => {
     if (event.target.matches('.download-button')) {
-      console.log('Download button clicked');
-      
       const button = event.target;
       const registrationElement = button.closest('.relative');
-      
+
       if (registrationElement) {
         const eventName = registrationElement.querySelector('.text-black.font-poppins.text-sm')?.textContent || '';
         const location = registrationElement.querySelector('.flex.gap-2.w-full.items-center.text-xs.font-poppins p:first-child')?.textContent || '';
         const time = registrationElement.querySelector('.flex.gap-2.w-full.items-center.text-xs.font-poppins p:last-child')?.textContent || '';
         const adminChatButton = registrationElement.querySelector('.admin-chat-button');
         const adminEmail = adminChatButton ? adminChatButton.getAttribute('data-email') : '';
-      
         const fullDate = registrationElement.getAttribute('data-date');
-      
-     
 
         generatePDF(eventName, location, time, adminEmail, fullDate);
       } else {
@@ -1345,12 +1390,21 @@ function scrollToSection(event, sectionId) {
 document.getElementById('event-navigate').addEventListener('click', function(event) {
   scrollToSection(event, 'events-section');
 });
+document.getElementById('event-navigates').addEventListener('click', function(event) {
+  scrollToSection(event, 'events-section');
+});
 
 document.getElementById('chat-navigate').addEventListener('click', function(event) {
   scrollToSection(event, 'chatSection');
 });
+document.getElementById('chat-navigates').addEventListener('click', function(event) {
+  scrollToSection(event, 'chatSection');
+});
 
 document.getElementById('calender-navigate').addEventListener('click', function(event) {
+  scrollToSection(event, 'calender-section');
+});
+document.getElementById('calender-navigates').addEventListener('click', function(event) {
   scrollToSection(event, 'calender-section');
 });
 
