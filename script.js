@@ -768,25 +768,56 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('signupEmailError').textContent = '';
     document.getElementById('signupPasswordError').textContent = '';
 
-    if (!name || !email || !password) {
-      if (!name) document.getElementById('signupNameError').textContent = 'Name is required';
-      if (!email) document.getElementById('signupEmailError').textContent = 'Email is required';
-      if (!password) document.getElementById('signupPasswordError').textContent = 'Password is required';
-      return;
-    }
 
-    try {
-      const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/auth/register', {
+    const passwordMinLength = 8 
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+    let valid = true
+  
+
+
+     
+    let pass = 0 
+
+    if (!name) {
+      document.getElementById('signupNameError').textContent = 'Name is required';
+      valid = false;
+  }
+  if (!email) {
+      document.getElementById('signupEmailError').textContent = 'Email is required';
+      valid = false;
+  }
+  if (!password) {
+      document.getElementById('signupPasswordError').textContent = 'Password is required';
+      valid = false;
+  } else if (password.length < passwordMinLength) {
+      document.getElementById('signupPasswordError').textContent = `Password must be at least ${passwordMinLength} characters long.`;
+      valid = false;
+  } else if (!passwordPattern.test(password)) {
+      document.getElementById('signupPasswordError').textContent = 'Password must contain at least one letter, one number, and one special character.';
+      valid = false;
+  }
+
+  if (!valid) return;
+     
+
+
+
+
+   
+
+  try {
+    const response = await fetch('https://event-manager-backend-cgrz.onrender.com/api/auth/register', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email, password }),
-      });
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
+    if (response.ok) {
         alert('Registration successful');
         
         localStorage.setItem('email', data.email);
@@ -794,73 +825,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('loginSignupButtons').classList.add('hidden');
         document.getElementById('logoutButton').classList.remove('hidden');
-  
+
         // Reset input fields
         document.getElementById('signupName').value = '';
         document.getElementById('signupEmail').value = '';
         document.getElementById('signupPassword').value = '';
 
         signupModal.classList.add('hidden');
-
         location.reload();
-      } else {
+    } else {
         alert(`Error: ${data.message}`);
-      }
-    } catch (error) {
-      console.error('Error:', error);
     }
+} catch (error) {
+    console.error('Error:', error);
+}
   });
 
-  // signupForm.addEventListener('submit', async (e) => {
-  //   e.preventDefault();
-  //   const name = document.getElementById('signupName').value.trim();
-  //   const email = document.getElementById('signupEmail').value.trim();
-  //   const password = document.getElementById('signupPassword').value.trim();
-  
-  //   // Clear previous errors
-  //   document.getElementById('signupNameError').textContent = '';
-  //   document.getElementById('signupEmailError').textContent = '';
-  //   document.getElementById('signupPasswordError').textContent = '';
-  
-  //   if (!name || !email || !password) {
-  //     if (!name) document.getElementById('signupNameError').textContent = 'Name is required';
-  //     if (!email) document.getElementById('signupEmailError').textContent = 'Email is required';
-  //     if (!password) document.getElementById('signupPasswordError').textContent = 'Password is required';
-  //     return;
-  //   }
-  
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/auth/register', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ name, email, password }),
-  //     });
-  
-  //     const data = await response.json();
-  
-  //     if (response.ok) {
-  //       // Show verification modal
-  //       localStorage.setItem('email', email);
-  //       document.getElementById('verificationModal').classList.remove('hidden');
-        
-  //       // Hide signup modal and reset fields
-  //       signupModal.classList.add('hidden');
-  //       document.getElementById('signupName').value = '';
-  //       document.getElementById('signupEmail').value = '';
-  //       document.getElementById('signupPassword').value = '';
-  
-  //       // Update UI state
-  //       document.getElementById('loginSignupButtons').classList.add('hidden');
-  //       document.getElementById('logoutButton').classList.remove('hidden');
-  //     } else {
-  //       alert(`Error: ${data.message}`);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // });
+
   
 });
 
