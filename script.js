@@ -354,11 +354,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   };
   
-  // const populateContainer = async () => {
-  //   const container = document.getElementById('container');
-  //   const registrations = await fetchRegistrations();
-  //   container.innerHTML = registrations.map(createHtmlStructure).join('');
-  // };
+  
   
   const populateContainer = async () => {
     const container = document.getElementById('container');
@@ -1129,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // change password 
 document.addEventListener('DOMContentLoaded', () => {
-  // Change Password Logic
+
   const changePasswordButton = document.getElementById('change-password-button');
   const oldPasswordInput = document.getElementById('old-password');
   const newPasswordInput = document.getElementById('new-password');
