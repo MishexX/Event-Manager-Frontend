@@ -403,6 +403,8 @@ const registerForEvent = async (eventData) => {
 
 
 // SEARCH AN EVENT 
+let events = [];
+
 document.getElementById('searchButton').addEventListener('click', async () => {
   const searchInputLg = document.getElementById('searchInputLg').value.trim();
   const searchInputSm = document.getElementById('searchInputSm').value.trim();
@@ -426,7 +428,8 @@ document.getElementById('searchButton').addEventListener('click', async () => {
     console.log('Search Results:', data);
 
     // Access the events array correctly
-    const events = Array.isArray(data.events) ? data.events : [];
+     // const events = Array.isArray(data.events) ? data.events : [];
+     events = Array.isArray(data.events) ? data.events : []
     const resultsContainer = document.getElementById('searchResults');
 
     if (events.length > 0) {
@@ -470,6 +473,20 @@ document.getElementById('searchResults').addEventListener('click', async (event)
     const eventName = button.getAttribute('data-event-name');
     const eventId = button.getAttribute('data-event-id');
     const token = localStorage.getItem('email');
+
+
+    const currentUserEmail = localStorage.getItem('email');
+    
+
+    const eventObject = events.find(event => event._id === eventId);
+    const eventCreatorEmail = eventObject.admin;
+    
+
+
+    if(currentUserEmail === eventCreatorEmail) {
+      alert("You cannot register for an event you created")
+      return
+    }
 
     //  data to register
     eventDataToRegister = {
